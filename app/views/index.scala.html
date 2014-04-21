@@ -1,12 +1,12 @@
-@(title: String, headline: String, paragraph: String)
+@(appInfo : uimodels.AppInfo)
 
 <html>
-<head><title>@title</title></head>
+<head><title>@appInfo.title</title></head>
 <body>
 
-<h1>@headline</h1>
+<h1>@appInfo.headline</h1>
 
-<p>@paragraph</p>
+<p>@appInfo.intro</p>
 
 </body>
 </html>
