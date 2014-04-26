@@ -1,5 +1,5 @@
 package uimodels
 
-case class Credentials(userId : String, password:String) {
+case class UserCredentials(userId : String, password:String) {
 
 }

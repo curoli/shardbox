@@ -1,2 +1,3 @@
-GET	/       controllers.ShardBoxController.index
+GET	   /        controllers.ShardBoxController.index
+POST   /login   controllers.ShardBoxController.login
 

@@ -10,4 +10,9 @@ object ShardBoxController extends Controller {
     Ok(views.html.index(ShardBoxAppInfo))
   }
   
+  def login = Action { implicit request =>
+    Ok("Holdon")
+    
+  }
+  
 }

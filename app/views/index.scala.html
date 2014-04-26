@@ -6,6 +6,15 @@
 
 <h1>@appInfo.headline</h1>
 
+@import helper._
+
+@defining(webutil.WebForms.login) { loginForm =>
+	@form(routes.ShardBoxController.login()) {
+	@inputText(loginForm("userId"))
+	@inputText(loginForm("password"))
+	}
+	}
+
 <p>@appInfo.intro</p>
 
 </body>
