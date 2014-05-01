@@ -1,14 +1,14 @@
-@(appInfo : uimodels.AppInfo, loginForm : play.api.data.Form[uimodels.UserCredentials])
+@(session: uimodels.ShardBoxSession)
 
 <html>
-<head><title>@appInfo.title</title></head>
+<head><title>@session.appInfo.title</title></head>
 <body>
 
-<h1>@appInfo.headline</h1>
+<h1>@session.appInfo.headline</h1>
 
 @import helper._
 
-@defining(webutil.WebForms.login) { loginForm =>
+@for(loginForm <- session.loginForm) {
 	@form(action = routes.ShardBoxController.login()) {
 	@inputText(loginForm("user"))
 	@inputPassword(loginForm("password"))
@@ -16,7 +16,7 @@
 	}
 	}
 
-<p>@appInfo.intro</p>
+<p>@session.appInfo.intro</p>
 
 </body>
 </html>
