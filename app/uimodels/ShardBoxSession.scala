@@ -19,23 +19,15 @@ case class UserId(id: String)
 object ShardBoxSession {
 
   def fromRequest(request:Request[_]) = {
-    ShardBoxSession(SessionId.fresh, request, ShardBoxAppInfo, None, Some(WebForms.login))    
+    ShardBoxSession(SessionId.fresh, request, ShardBoxAppInfo, None)    
   }
 
 }
 
 case class ShardBoxSession(val id: SessionId, val request:Request[_], val appInfo: AppInfo, 
-    val userId: Option[UserId], val loginForm: Option[Form[UserCredentials]]) {
+    val userId: Option[UserId]) {
 
-  def withLoginForm(loginForm : Form[UserCredentials]) = copy(loginForm = Some(loginForm))
-  
-  def withLoginFormBoundFromRequest = {
-    val formBound = (loginForm match {
-      case Some(loginForm) => loginForm
-      case None => WebForms.login
-    }).bindFromRequest()(request)
-    withLoginForm(formBound)
-  }
+  lazy val loginForm = WebForms.login.bindFromRequest()(request)
   
 }
 

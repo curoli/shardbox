@@ -8,7 +8,7 @@
 
 @import helper._
 
-@for(loginForm <- session.loginForm) {
+@defining(session.loginFormBoundFromRequest) { loginForm =>
 	@form(action = routes.ShardBoxController.login()) {
 	@inputText(loginForm("user"))
 	@inputPassword(loginForm("password"))

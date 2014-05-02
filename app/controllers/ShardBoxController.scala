@@ -13,10 +13,10 @@ object ShardBoxController extends Controller {
   }
 
   def login = Action { implicit request =>
-    val session = ShardBoxSession.fromRequest(request).withLoginFormBoundFromRequest
-    session.loginForm.get.fold(
+    val session = ShardBoxSession.fromRequest(request)
+    session.loginForm.fold(
       formWithErrors => {
-        Ok(views.html.index(session.withLoginForm(formWithErrors)))
+        Ok(views.html.index(session))
       },
       credentials => {
         Ok("Holdon!")
