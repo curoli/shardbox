@@ -9,11 +9,11 @@ import uimodels.ShardBoxSession
 object ShardBoxController extends Controller {
 
   def index = Action { implicit request =>
-    Ok(views.html.index(ShardBoxSession.fresh))
+    Ok(views.html.index(ShardBoxSession.fromRequest(request)))
   }
 
   def login = Action { implicit request =>
-    val session = ShardBoxSession.fresh.withLoginFormBoundFromRequest
+    val session = ShardBoxSession.fromRequest(request).withLoginFormBoundFromRequest
     session.loginForm.get.fold(
       formWithErrors => {
         Ok(views.html.index(session.withLoginForm(formWithErrors)))
