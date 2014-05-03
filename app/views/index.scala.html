@@ -8,13 +8,45 @@
 
 @import helper._
 
-@defining(session.loginFormBoundFromRequest) { loginForm =>
+@defining(session.loginForm) { loginForm =>
 	@form(action = routes.ShardBoxController.login()) {
 	@inputText(loginForm("user"))
 	@inputPassword(loginForm("password"))
 	<button>login</button>
 	}
 	}
+
+<h6>Request Dump</h6>
+
+@defining(session.request) { request =>
+	<table>
+	<tr><td>Request</td><td><pre>@request</pre></td></tr>
+	<tr><td>Version</td><td><pre>@request.version</pre></td></tr>
+	<tr><td>Session</td><td><pre>@request.session</pre></td></tr>
+	<tr><td>Domain</td><td><pre>@request.domain</pre></td></tr>
+	<tr><td>Accepted Types</td><td><pre>@request.acceptedTypes</pre></td></tr>
+	<tr><td>Accept Languages</td><td><pre>@request.acceptLanguages</pre></td></tr>
+	<tr><td>Host</td><td><pre>@request.host</pre></td></tr>
+	<tr><td>Method</td><td><pre>@request.method</pre></td></tr>
+	<tr><td>Query String</td><td><pre>@request.queryString</pre></td></tr>
+	<tr><td>Id</td><td><pre>@request.id</pre></td></tr>
+	<tr><td>Tags</td><td><pre>@request.tags</pre></td></tr>
+	<tr><td>Remote Address</td><td><pre>@request.remoteAddress</pre></td></tr>
+	<tr><td>Charset</td><td><pre>@request.charset</pre></td></tr>
+	<tr><td>Path</td><td><pre>@request.path</pre></td></tr>
+	<tr><td>URI</td><td><pre>@request.uri</pre></td></tr>
+	<tr><td>Content Type</td><td><pre>@request.contentType</pre></td></tr>
+	<tr><td>Cookies</td><td><pre>@request.cookies</pre></td></tr>
+	<tr><td>Raw Query String</td><td><pre>@request.rawQueryString</pre></td></tr>
+	<tr><td>Flash</td><td><pre>@request.flash</pre></td></tr>
+	<tr><td>Headers</td><td><pre>@request.headers</pre></td></tr>
+	<tr><td>Media Type</td><td><pre>@request.mediaType</pre></td></tr>
+	</table>
+	
+	
+	}
+
+<h6>Intro</h6>
 
 <p>@session.appInfo.intro</p>
 

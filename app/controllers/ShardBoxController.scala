@@ -19,7 +19,7 @@ object ShardBoxController extends Controller {
         Ok(views.html.index(session))
       },
       credentials => {
-        Ok("Holdon!")
+        Ok(views.html.index(session))
       })
   }
 
