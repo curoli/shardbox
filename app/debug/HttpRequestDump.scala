@@ -62,7 +62,8 @@ object HttpRequestDump {
       "rawQueryString" -> request.rawQueryString,
       "flash" -> request.flash,
       "headers" -> request.headers,
-      "mediaType" -> request.mediaType)
+      "mediaType" -> request.mediaType,
+      "body" -> ("" + request.body))
   }
 
   def dump(request: Request[_]): String = {
