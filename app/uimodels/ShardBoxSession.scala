@@ -6,20 +6,26 @@ import play.api.data.Form
 import play.api.mvc.Request
 
 object SessionId {
+  
+  val key = "ShardBoxSessionId"
 
   val random = new Random
 
   def fresh = SessionId("" + System.currentTimeMillis() + "-" + random.nextLong)
+  
+  def fromRequestOrElseFresh(request:Request[_]) = {
+    request.session.get(key).map(SessionId(_)).getOrElse(fresh)
+  }
 
 }
 
-case class SessionId(id: String)
-case class UserId(id: String)
+case class SessionId(string: String)
+case class UserId(string: String)
 
 object ShardBoxSession {
 
   def fromRequest(request:Request[_]) = {
-    ShardBoxSession(SessionId.fresh, request, ShardBoxAppInfo, None)    
+    ShardBoxSession(SessionId.fromRequestOrElseFresh(request), request, ShardBoxAppInfo, None)    
   }
 
 }
