@@ -10,19 +10,11 @@ import uimodels.SessionId
 object ShardBoxController extends Controller {
 
   def index = Action { implicit request =>
-    val sBSession = ShardBoxSession.fromRequest(request)
-    Ok(views.html.index(sBSession)).withSession(session + (SessionId.key -> sBSession.id.string))
+    ShardBoxSession.fromRequest(request).respond(views.html.index(_))
   }
 
   def login = Action { implicit request =>
-    val sBSession = ShardBoxSession.fromRequest(request)
-    sBSession.loginForm.fold(
-      formWithErrors => {
-        Ok(views.html.index(sBSession))
-      },
-      credentials => {
-        Ok(views.html.index(sBSession))
-      }).withSession(session + (SessionId.key -> sBSession.id.string))
+    ShardBoxSession.fromRequest(request).respond(views.html.index(_))
   }
 
 }
