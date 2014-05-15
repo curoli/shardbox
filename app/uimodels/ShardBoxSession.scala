@@ -7,6 +7,7 @@ import play.api.mvc.Request
 import play.api.mvc.SimpleResult
 import play.api.templates.Html
 import play.api.mvc.Results.Ok
+import store.SessionStore
 
 case class UserId(string: String)
 
@@ -21,6 +22,14 @@ object SessionId {
   def parse(string: String): SessionId = {
     val array = string.split("#").map(_.toLong)
     SessionId(array(0), array(1))
+  }
+
+  def fromRequest(request: Request[_]) :Option[SessionId] = {
+    try {
+      request.session.get(key).map(parse(_))
+    } catch {
+      case e: Exception => None
+    }
   }
 
   def fromRequestOrElseFresh(request: Request[_]) = {
@@ -40,6 +49,7 @@ case class SessionId(time: Long, random: Long) {
 object ShardBoxSession {
 
   def fromRequest(request: Request[_]) = {
+    
     val sessionId = SessionId.fromRequestOrElseFresh(request)
     val loginForm = WebForms.login.bindFromRequest()(request)
     val credsOpt = loginForm.fold(loginFormWithErrors => None, creds => Some(creds))

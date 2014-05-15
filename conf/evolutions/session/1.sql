@@ -3,8 +3,10 @@
 # --- !Ups
  
 CREATE TABLE Session (
-    idTime Long NOT NULL,
-    idRandom Long NOT NULL,
+    idTime BIGINT NOT NULL,
+    idRandom BIGINT NOT NULL,
+    isAuthenticated BOOLEAN DEFAULT FALSE NOT NULL,
+    userId VARCHAR(255),
     PRIMARY KEY (idTime, idRandom)
 );
  
